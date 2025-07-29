@@ -1,1 +1,0 @@
-yarn auth:$SERVER_START_APP_NAME

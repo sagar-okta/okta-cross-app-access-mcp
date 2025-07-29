@@ -20,7 +20,6 @@ A proof-of-concept for the [Identity Assertion Authorization Grant](https://data
 **Highly Recommended:**
 
 - **Run in GitHub Codespaces**
-
   - Click "Code" → "Create a codespace on main" in the GitHub UI and your environment will be ready in minutes.
   - Or, launch instantly:
 
@@ -57,7 +56,7 @@ Edit the following files to fill in required values:
 
 - `packages/authorization-server/.env.todo`
 - `packages/authorization-server/.env.wiki`
-- `packages/mcp-bedrock-client/.env` <!-- Added line -->
+- `packages/agent0/.env` <!-- Added line -->
 
 **Required fields:**
 
@@ -71,7 +70,7 @@ Edit the following files to fill in required values:
 |                                           | `CUSTOMER1_AUTH_ISSUER`   | `https://{orgDomain}.oktapreview.com` |
 |                                           | `CUSTOMER1_CLIENT_ID`     | `<OIDC client id at IdP>`             |
 |                                           | `CUSTOMER1_CLIENT_SECRET` | `<OIDC client secret at IdP>`         |
-| `packages/mcp-bedrock-client/.env`        | `AWS_ACCESS_KEY_ID`       | `<your AWS access key id>`            |
+| `packages/agent0/.env`                    | `AWS_ACCESS_KEY_ID`       | `<your AWS access key id>`            |
 |                                           | `AWS_SECRET_ACCESS_KEY`   | `<your AWS secret access key>`        |
 
 > **How to retrieve these values:**
@@ -130,7 +129,7 @@ yarn dev:mcp
 >   - `yarn auth:wiki`
 >   - `yarn dev:todo`
 >   - `yarn auth:todo`
->   - `yarn dev:mcp-bedrock-client`
+>   - `yarn dev:agent0`
 
 ## Optionally, open the application UIs in your browser
 

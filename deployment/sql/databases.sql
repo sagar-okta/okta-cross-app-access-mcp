@@ -1,5 +1,0 @@
-CREATE DATABASE IF NOT EXISTS `wiki`;
-CREATE DATABASE IF NOT EXISTS `todo`;
-
-CREATE USER 'cloudmaker'@'%' IDENTIFIED BY 'avocado';
-GRANT ALL PRIVILEGES ON *.* TO 'cloudmaker'@'%';
