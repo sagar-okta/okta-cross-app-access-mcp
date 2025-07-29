@@ -24,7 +24,7 @@ export const jwtStrategy = new JwtStrategy(
     }),
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     issuer: authServer,
-    audience: `${process.env.WIKI_SERVER}/`,
+    audience: `${process.env.AGENT_SERVER}/`,
     algorithms: ['RS256'],
     passReqToCallback: true,
   },

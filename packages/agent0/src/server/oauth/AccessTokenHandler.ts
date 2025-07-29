@@ -1,5 +1,4 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-// import { User } from '@prisma/client/wiki';
 import prisma from '../../prisma';
 
 class AccessTokenHandler {

@@ -17,7 +17,7 @@ import { MCPBedrockClient } from './mcp-bedrock-client.js';
 import prisma from './prisma.js';
 import article from './server/controllers/article.js';
 import authtoken from './server/controllers/authtoken.js';
-import oidc, { WIKI_COOKIE_NAME } from './server/controllers/oidc.js';
+import oidc, { AGENT_COOKIE_NAME } from './server/controllers/oidc.js';
 import user from './server/controllers/user.js';
 import { JWT_STRATEGY_NAME, jwtStrategy } from './server/jwt/jwt-strategy.js';
 import { defaultMcpServers, getAccessToken } from './utils.js';
@@ -83,7 +83,7 @@ redisClient.connect().catch(console.error);
 
 const redisStore = new RedisStore({
   client: redisClient,
-  prefix: 'wiki0:',
+  prefix: 'agent0:',
 });
 
 const cookieSecret = process.env.COOKIE_SECRET;
@@ -99,7 +99,7 @@ const sessionMiddleware = session({
     httpOnly: true,
     sameSite: 'lax',
   },
-  name: WIKI_COOKIE_NAME,
+  name: AGENT_COOKIE_NAME,
   store: redisStore,
 });
 
@@ -688,7 +688,7 @@ class MCPWebServer {
 
       // Authentication URL with OAuth parameters
       const authUrl =
-        'http://localhost:5000/auth?response_type=code&client_id=wiki0&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fopenid%2Fcallback%2F&scope=openid%20profile%20email%20openid%20read%20write&login_hint=bob%40tables.fake&state=YmlpYLq2bBsDMoLYRf7Bvx2s';
+        'http://localhost:5000/auth?response_type=code&client_id=agent0&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fopenid%2Fcallback%2F&scope=openid%20profile%20email%20openid%20read%20write&login_hint=bob%40tables.fake&state=YmlpYLq2bBsDMoLYRf7Bvx2s';
 
       // Make the authentication request
       const response = await fetch(authUrl, {
@@ -726,7 +726,7 @@ class MCPWebServer {
   public async start(): Promise<void> {
     return new Promise((resolve) => {
       this.server.listen(this.port, () => {
-        logger.success(`MCP Bedrock Web Server running on http://localhost:${this.port}`);
+        logger.success(`Agent0 MCP Web Server running on http://localhost:${this.port}`);
         resolve();
       });
     });
@@ -745,7 +745,7 @@ class MCPWebServer {
       this.connectedClients.clear();
 
       this.server.close(() => {
-        logger.info('MCP Bedrock Web Server stopped');
+        logger.info('Agent0 MCP Web Server stopped');
         resolve();
       });
     });

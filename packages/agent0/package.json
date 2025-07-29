@@ -13,6 +13,8 @@
     "dev:web": "yarn build && yarn start:web",
     "dev:todo-server": "yarn build && yarn start:todo-server",
     "examples": "npm run build && node dist/examples.js",
+    "resetdb": "prisma migrate reset --schema=prisma/schema.prisma && tsx prisma/reset_data.ts",
+    "migratedb": "prisma migrate dev --schema prisma/schema.prisma",
     "clean": "rm -rf dist",
     "watch": "tsc --watch",
     "postinstall": "prisma generate"

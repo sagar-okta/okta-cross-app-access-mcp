@@ -26,7 +26,7 @@ export class MCPBedrockClient {
     });
     this.modelId = config.modelId || process.env.BEDROCK_MODEL_ID || BEDROCK_MODELS.CLAUDE_3_HAIKU;
 
-    logger.info('Initialized MCP Bedrock Client', {
+    logger.info('Initialized Agent0 MCP Client', {
       region: config.region || process.env.AWS_REGION || DEFAULT_REGION,
       modelId: this.modelId,
     });

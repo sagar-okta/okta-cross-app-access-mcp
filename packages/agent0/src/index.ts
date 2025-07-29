@@ -4,7 +4,7 @@ import { logger } from './logger.js';
 import { MCPWebServer } from './web-server.js';
 
 async function main() {
-  console.log('🚀 Starting MCP Bedrock Web Client...');
+  console.log('🚀 Starting Agent0 MCP Client...');
 
   // const accessToken = await getAccessToken();
   const port = parseInt(process.env.PORT || '3000', 10);

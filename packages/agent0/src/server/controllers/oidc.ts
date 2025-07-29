@@ -17,7 +17,7 @@ declare module 'express-session' {
 }
 
 // Most of the code below comes from https://developer.okta.com/blog/2023/07/28/oidc_workshop
-export const WIKI_COOKIE_NAME = 'wiki.sid';
+export const AGENT_COOKIE_NAME = 'agent.sid';
 const controller: Router = Router();
 
 async function orgFromDomain(domain: string) {
@@ -230,7 +230,7 @@ function createStrategy(username: string) {
       clientID: process.env.CLIENT1_CLIENT_ID!,
       clientSecret: process.env.CLIENT1_CLIENT_SECRET!,
       scope: 'profile email openid read write',
-      callbackURL: `${process.env.WIKI_SERVER}/api/openid/callback/`,
+      callbackURL: `${process.env.AGENT_SERVER}/api/openid/callback/`,
       loginHint: username,
     },
     verify
@@ -291,7 +291,7 @@ controller.post('/signout', async (req, res, next) => {
     if (!err) {
       res
         .status(200)
-        .clearCookie(WIKI_COOKIE_NAME, { path: '//anotherpath' })
+        .clearCookie(AGENT_COOKIE_NAME, { path: '//anotherpath' })
         .json({ status: 'Success' });
     } else {
       next(err);
