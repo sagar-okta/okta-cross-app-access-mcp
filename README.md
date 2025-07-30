@@ -1,6 +1,12 @@
 > ⚠️ **Important:**
 > To run this Cross-App Access MCP demo app, you'll need an Okta Preview account. If you don't already have one, or if you're interested in testing Cross-App Access with Okta as your Identity Provider (IdP), please [sign up for our early access offering](https://www.okta.com/saas-security/sign-up/?_gl=1*pp31c*_gcl_au*NjgzNDkyOTQxLjE3NTA4Nzg2Njk.*_ga*MTk5NjYyODgxMi4xNzUwMjg1MDM3*_ga_QKMSDV5369*czE3NTEyOTY4OTYkbzgkZzEkdDE3NTEyOTg0MjEkajM5JGwwJGgw).
 
+[![Node.js Version](https://img.shields.io/badge/node.js-20.x-brightgreen?logo=node.js)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/oktadev/okta-cross-app-access-mcp)](https://snyk.io/test/github/oktadev/okta-cross-app-access-mcp)
+[![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?logo=prettier)](https://prettier.io/)
+[![Last Commit](https://img.shields.io/github/last-commit/oktadev/okta-cross-app-access-mcp)](https://github.com/oktadev/okta-cross-app-access-mcp/commits/main)
+
 # Okta Cross App Access MCP - Node Example
 
 A proof-of-concept demonstrating how a Model Context Protocol (MCP) can leverage the [Identity Assertion Authorization Grant](https://datatracker.ietf.org/doc/html/draft-parecki-oauth-identity-assertion-authz-grant) specification to enable secure and interoperable authorization of MCP clients within enterprise environments, using existing identity infrastructure.
@@ -22,7 +28,7 @@ A proof-of-concept demonstrating how a Model Context Protocol (MCP) can leverage
   - Click "Code" → "Create a codespace on main" in the GitHub UI and your environment will be ready in minutes.
   - Or, launch instantly:
 
-    [<img src="https://github.com/codespaces/badge.svg" title="Open in Github Codespace" width="150" height="20">](https://github.com/codespaces/new?repo=oktadev/id-assertion-authz-node-example)
+    [<img src="https://github.com/codespaces/badge.svg" title="Open in Github Codespace" width="300" height="60">](https://github.com/codespaces/new?repo=oktadev/okta-cross-app-access-mcp)
 
 **Alternative (Running Locally):**
 
