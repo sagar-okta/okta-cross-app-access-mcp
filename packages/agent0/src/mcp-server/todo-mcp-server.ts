@@ -153,7 +153,7 @@ class TodoMCPServer {
         }
         if (name === 'update_todos') {
           console.error('📋 Executing update_todos tool');
-          return await this.updateTodos(args as { id: Number; todoStatus: boolean });
+          return await this.updateTodos(args as { id: number; todoStatus: boolean });
         }
 
         console.error(`❌ Unknown tool: ${name}`);
@@ -227,7 +227,7 @@ class TodoMCPServer {
 
       // Make API call to update reminder
       const response = await fetch('http://localhost:3001/api/todo/3', {
-        method: 'GET`',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${process.env.ACCESS_TOKEN || ''}`,
@@ -458,7 +458,7 @@ class TodoMCPServer {
     }
   }
 
-  private async updateTodos(todo: { id: Number; todoStatus: boolean }) {
+  private async updateTodos(todo: { id: number; todoStatus: boolean }) {
     try {
       console.error('📋 Fetching todos from API...');
 
