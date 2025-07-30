@@ -30,11 +30,10 @@ A proof-of-concept demonstrating how a Model Context Protocol (MCP) can leverage
 
     [<img src="https://github.com/codespaces/badge.svg" title="Open in Github Codespace" width="300" height="60">](https://github.com/codespaces/new?repo=oktadev/okta-cross-app-access-mcp)
 
-**Alternative (Running Locally):**
-
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (required for local containers)
-- [VS Code](https://code.visualstudio.com/) (required for Dev Containers)
-- [Dev Containers VSCode Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- **Run Locally in VS Code (Alternative):**
+  - [Docker Desktop](https://www.docker.com/products/docker-desktop/) (required for local containers)
+  - [VS Code](https://code.visualstudio.com/) (required for Dev Containers)
+  - [Dev Containers VSCode Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 ## 1. Clone and Open in VS Code
 
