@@ -1,9 +1,9 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node-mongo
 {
-  "name": "id-assertion-authz-node-example Dev Environment",
+  "name": "okta-cross-app-access-mcp-node-example Dev Environment",
   "dockerComposeFile": "docker-compose.yml",
-  "service": "id-assertion-authz-node-example",
+  "service": "okta-cross-app-access-mcp-node-example",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},

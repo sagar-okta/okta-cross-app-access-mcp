@@ -1,5 +1,5 @@
 {
-  "name": "id-assertion-authz-node-example",
+  "name": "okta-cross-app-access-mcp-node-example",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

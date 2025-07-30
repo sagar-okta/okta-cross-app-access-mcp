@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-  id-assertion-authz-node-example:
+  okta-cross-app-access-mcp-node-example:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - ../..:/workspaces:cached
       # The line below speeds up slowness of running jest tests (see https://github.com/docker/for-mac/issues/1358).
-      - /workspaces/id-assertion-authz-node-example/node_modules
+      - /workspaces/okta-cross-app-access-mcp-node-example/node_modules
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
