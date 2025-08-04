@@ -5,7 +5,8 @@ export async function getAccessToken(cookie: any): Promise<any> {
   try {
     console.log('🔑 Fetching access token from API...');
     console.log(`cookie is ${cookie}`);
-    const response = await fetch('http://localhost:3000/api/tokens', {
+    const AGENT_SERVER = process.env.AGENT_SERVER;
+    const response = await fetch(`${AGENT_SERVER}/api/tokens`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

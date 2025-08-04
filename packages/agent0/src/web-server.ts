@@ -685,10 +685,9 @@ class MCPWebServer {
   private async initiate_auth(): Promise<void> {
     try {
       logger.info('🔐 Initiating authentication flow...');
-
-      // Authentication URL with OAuth parameters
+      const authServer = process.env.AUTH_SERVER;
       const authUrl =
-        'http://localhost:5000/auth?response_type=code&client_id=agent0&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fopenid%2Fcallback%2F&scope=openid%20profile%20email%20openid%20read%20write&login_hint=bob%40tables.fake&state=YmlpYLq2bBsDMoLYRf7Bvx2s';
+        `${authServer}/auth?response_type=code&client_id=agent0&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fopenid%2Fcallback%2F&scope=openid%20profile%20email%20openid%20read%20write&login_hint=bob%40tables.fake&state=YmlpYLq2bBsDMoLYRf7Bvx2s`;
 
       // Make the authentication request
       const response = await fetch(authUrl, {
