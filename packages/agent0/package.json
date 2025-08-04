@@ -17,7 +17,7 @@
     "migratedb": "prisma migrate dev --schema prisma/schema.prisma",
     "clean": "rm -rf dist",
     "watch": "tsc --watch",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && yarn build"
   },
   "keywords": [
     "mcp",
