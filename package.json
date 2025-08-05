@@ -14,7 +14,7 @@
     "migratedb": "yarn workspace todo0 migratedb",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --cache",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "setup:env": "node scripts/setup-env.js && node scripts/github/replace-env.js",
+    "setup:env": "node scripts/setup-env.js",
     "bootstrap": "node scripts/bootstrap.js",
     "start": "node scripts/start-with-expose.js",
     "open:apps": "node scripts/open-apps.js",
