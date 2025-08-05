@@ -18,6 +18,7 @@ import prisma from './prisma';
 dotenv.config({ path: findConfig('.env') || undefined });
 
 const app = express();
+app.set('trust proxy', 1); // Trust Codespaces/Heroku-style proxy
 app.use(express.json());
 
 const redisClient = createClient({

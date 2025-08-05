@@ -121,6 +121,7 @@ class MCPWebServer {
   constructor(port: number = 3000) {
     this.port = port;
     this.app = express();
+    this.app.set('trust proxy', 1); // Trust Codespaces/Heroku-style proxy
     this.server = createServer(this.app);
     this.io = new Server(this.server, {
       cors: {
@@ -686,8 +687,10 @@ class MCPWebServer {
     try {
       logger.info('🔐 Initiating authentication flow...');
       const authServer = process.env.AUTH_SERVER;
+      const baseUrl = process.env.APP_BASE_URL || `http://localhost:3000`;
+      const redirectUri = encodeURIComponent(`${baseUrl}/api/openid/callback/`);
       const authUrl =
-        `${authServer}/auth?response_type=code&client_id=agent0&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fopenid%2Fcallback%2F&scope=openid%20profile%20email%20openid%20read%20write&login_hint=bob%40tables.fake&state=YmlpYLq2bBsDMoLYRf7Bvx2s`;
+        `${authServer}/auth?response_type=code&client_id=agent0&redirect_uri=${redirectUri}&scope=openid%20profile%20email%20openid%20read%20write&login_hint=bob%40tables.fake&state=YmlpYLq2bBsDMoLYRf7Bvx2s`;
 
       // Make the authentication request
       const response = await fetch(authUrl, {
@@ -724,7 +727,7 @@ class MCPWebServer {
 
   public async start(): Promise<void> {
     return new Promise((resolve) => {
-      this.server.listen(this.port, () => {
+      this.server.listen(this.port, '0.0.0.0', () => {
         logger.success(`Agent0 MCP Web Server running on http://localhost:${this.port}`);
         resolve();
       });

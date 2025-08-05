@@ -4,12 +4,12 @@ import session from 'express-session';
 import * as path from 'node:path';
 import Provider from 'oidc-provider';
 import passport from 'passport';
+import { createClient } from "redis";
 import jwtAuthorizationGrant from './jwt-authorization-grant.js';
+import oidc from './routes/oidc.js';
+import saml from './routes/saml.js';
 import makeConfiguration from './server-configuration.js';
 import tokenExchange from './token-exchange.js';
-import {createClient} from "redis"
-import saml from './routes/saml.js';
-import oidc from './routes/oidc.js';
 
 const __dirname = dirname(import.meta.url);
 
@@ -19,6 +19,7 @@ const ISSUER = process.env.AUTH_SERVER;
 const cookieSecret = process.env.COOKIE_SECRET;
 
 const app = express();
+app.set('trust proxy', 1); // Trust Codespaces/Heroku-style proxy
 
 const redisClient = createClient({
   url: process.env.REDIS_SERVER,
@@ -71,7 +72,7 @@ app.use(provider.callback());
 
 let server = null;
 try {
-  server = app.listen(PORT, () => {
+  server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`application is listening on port ${PORT}: ${ISSUER}/.well-known/openid-configuration`);
   });
 } catch (err) {
