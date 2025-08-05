@@ -19,7 +19,28 @@ const ISSUER = process.env.AUTH_SERVER;
 const cookieSecret = process.env.COOKIE_SECRET;
 
 const app = express();
-app.set('trust proxy', 1); // Trust Codespaces/Heroku-style proxy
+
+// Enable trust proxy for Codespaces
+app.set('trust proxy', 1);
+
+// Override host and protocol for Codespaces
+app.use((req, res, next) => {
+  if (process.env.CODESPACE_NAME) {
+    req.headers['host'] = `${process.env.CODESPACE_NAME}-${PORT}.app.github.dev`;
+    req.protocol = 'https';
+  }
+  next();
+});
+
+// Log headers for debugging
+app.use((req, res, next) => {
+  console.log('Headers:', {
+    host: req.headers['host'],
+    'x-forwarded-host': req.headers['x-forwarded-host'],
+    'x-forwarded-proto': req.headers['x-forwarded-proto'],
+  });
+  next();
+});
 
 const redisClient = createClient({
   url: process.env.REDIS_SERVER,

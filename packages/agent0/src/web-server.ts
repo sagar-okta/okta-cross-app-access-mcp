@@ -197,6 +197,28 @@ class MCPWebServer {
     });
 
     passport.use(JWT_STRATEGY_NAME, jwtStrategy);
+
+    // Enable trust proxy for Codespaces
+    this.app.set('trust proxy', 1);
+
+    // Override host and protocol for Codespaces
+    this.app.use((req, res, next) => {
+      if (process.env.CODESPACE_NAME) {
+        req.headers['host'] = `${process.env.CODESPACE_NAME}-3000.app.github.dev`;
+        req.headers['x-forwarded-proto'] = 'https';
+      }
+      next();
+    });
+
+    // Log headers for debugging
+    this.app.use((req, res, next) => {
+      console.log('Headers:', {
+        host: req.headers['host'],
+        'x-forwarded-host': req.headers['x-forwarded-host'],
+        'x-forwarded-proto': req.headers['x-forwarded-proto'],
+      });
+      next();
+    });
   }
 
   private setupRoutes(): void {
