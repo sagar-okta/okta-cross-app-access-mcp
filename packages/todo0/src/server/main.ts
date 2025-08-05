@@ -93,14 +93,5 @@ app.use((req, res, next) => {
   next();
 });
 
-// Log headers for debugging
-app.use((req, res, next) => {
-  console.log('Headers:', {
-    host: req.headers['host'],
-    'x-forwarded-host': req.headers['x-forwarded-host'],
-    'x-forwarded-proto': req.headers['x-forwarded-proto'],
-  });
-  next();
-});
 
 ViteExpress.listen(app, 3001, () => console.log('Server is listening on port 3001...'));

@@ -209,16 +209,6 @@ class MCPWebServer {
       }
       next();
     });
-
-    // Log headers for debugging
-    this.app.use((req, res, next) => {
-      console.log('Headers:', {
-        host: req.headers['host'],
-        'x-forwarded-host': req.headers['x-forwarded-host'],
-        'x-forwarded-proto': req.headers['x-forwarded-proto'],
-      });
-      next();
-    });
   }
 
   private setupRoutes(): void {

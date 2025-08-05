@@ -18,7 +18,7 @@
     "bootstrap": "node scripts/bootstrap.js",
     "start": "concurrently --names \"agent0,auth-agent,todo0,auth-todo\" --prefix-colors \"cyan,magenta,green,red\"  --output-path logs/dev-agent0.log \"yarn dev:agent0\" \"yarn auth:agent\" \"yarn dev:todo\" \"yarn auth:todo\"",
     "open:apps": "node scripts/open-apps.js",
-    "expose-ports": "node scripts/expose-ports.js",
+    "expose-ports": "node scripts/github/expose-ports.js",
     "build:agent0": "yarn workspace agent0 build",
     "dev:agent0": "yarn workspace agent0 dev",
     "start:agent0": "yarn workspace agent0 start",

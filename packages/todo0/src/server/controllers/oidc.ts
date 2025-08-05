@@ -123,12 +123,15 @@ function createStrategy(username: string) {
       clientID: process.env.CLIENT1_CLIENT_ID!,
       clientSecret: process.env.CLIENT1_CLIENT_SECRET!,
       scope: 'profile email openid read write',
-      callbackURL: `${process.env.APP_BASE_URL || 'http://localhost:3001'}/api/openid/callback/`,
+      callbackURL: `${process.env.TODO_SERVER}/api/openid/callback/`,
+      // callbackURL: `${process.env.APP_BASE_URL || 'http://localhost:3001'}/api/openid/callback/`,
       loginHint: username,
     },
     verify
   );
 }
+
+console.log('Callback:', `${process.env.TODO_SERVER}/api/openid/callback/`);
 
 controller.post('/signout', async (req, res, next) => {
   req.logout((err) => {

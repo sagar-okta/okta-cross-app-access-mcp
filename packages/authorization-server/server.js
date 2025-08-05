@@ -27,20 +27,11 @@ app.set('trust proxy', 1);
 app.use((req, res, next) => {
   if (process.env.CODESPACE_NAME) {
     req.headers['host'] = `${process.env.CODESPACE_NAME}-${PORT}.app.github.dev`;
-    req.protocol = 'https';
+    req.headers['x-forwarded-proto'] = 'https';
   }
   next();
 });
 
-// Log headers for debugging
-app.use((req, res, next) => {
-  console.log('Headers:', {
-    host: req.headers['host'],
-    'x-forwarded-host': req.headers['x-forwarded-host'],
-    'x-forwarded-proto': req.headers['x-forwarded-proto'],
-  });
-  next();
-});
 
 const redisClient = createClient({
   url: process.env.REDIS_SERVER,
