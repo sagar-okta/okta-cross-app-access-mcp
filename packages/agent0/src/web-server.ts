@@ -121,7 +121,7 @@ class MCPWebServer {
   constructor(port: number = 3000) {
     this.port = port;
     this.app = express();
-    this.app.set('trust proxy', 1); // Trust Codespaces/Heroku-style proxy
+    // this.app.set('trust proxy', 1); // Trust Codespaces/Heroku-style proxy
     this.server = createServer(this.app);
     this.io = new Server(this.server, {
       cors: {
@@ -199,16 +199,16 @@ class MCPWebServer {
     passport.use(JWT_STRATEGY_NAME, jwtStrategy);
 
     // Enable trust proxy for Codespaces
-    this.app.set('trust proxy', 1);
+    // this.app.set('trust proxy', 1);
 
     // Override host and protocol for Codespaces
-    this.app.use((req, res, next) => {
-      if (process.env.CODESPACE_NAME) {
-        req.headers['host'] = `${process.env.CODESPACE_NAME}-3000.app.github.dev`;
-        req.headers['x-forwarded-proto'] = 'https';
-      }
-      next();
-    });
+    // this.app.use((req, res, next) => {
+    //   if (process.env.CODESPACE_NAME) {
+    //     req.headers['host'] = `${process.env.CODESPACE_NAME}-3000.app.github.dev`;
+    //     req.headers['x-forwarded-proto'] = 'https';
+    //   }
+    //   next();
+    // });
   }
 
   private setupRoutes(): void {

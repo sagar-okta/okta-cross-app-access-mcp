@@ -16,7 +16,7 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "setup:env": "node scripts/setup-env.js",
     "bootstrap": "node scripts/bootstrap.js",
-    "start": "node scripts/start-with-expose.js",
+    "start": "concurrently --names \"agent0,auth-agent,todo0,auth-todo\" --prefix-colors \"cyan,magenta,green,red\"  --output-path logs/dev-agent0.log \"yarn dev:agent0\" \"yarn auth:agent\" \"yarn dev:todo\" \"yarn auth:todo\"",
     "open:apps": "node scripts/open-apps.js",
     "expose:ports": "node scripts/github/expose-ports.js",
     "replace:env": "node scripts/github/replace-env.js",

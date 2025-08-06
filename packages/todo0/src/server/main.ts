@@ -18,7 +18,7 @@ import prisma from './prisma';
 dotenv.config({ path: findConfig('.env') || undefined });
 
 const app = express();
-app.set('trust proxy', 1); // Trust Codespaces/Heroku-style proxy
+// app.set('trust proxy', 1); // Trust Codespaces/Heroku-style proxy
 app.use(express.json());
 
 const redisClient = createClient({
@@ -84,14 +84,14 @@ app.use('/api/todos', authenticated, todo);
 app.use('/api/users', authenticated, user);
 app.use('/api/openid/', oidc);
 
-// Override host and protocol for Codespaces
-app.use((req, res, next) => {
-  if (process.env.CODESPACE_NAME) {
-    req.headers['host'] = `${process.env.CODESPACE_NAME}-3001.app.github.dev`;
-     req.headers['x-forwarded-proto'] = 'https';
-  }
-  next();
-});
+ // Override host and protocol for Codespaces
+// app.use((req, res, next) => {
+//   if (process.env.CODESPACE_NAME) {
+//     req.headers['host'] = `${process.env.CODESPACE_NAME}-3001.app.github.dev`;
+//      req.headers['x-forwarded-proto'] = 'https';
+//   }
+//   next();
+// });
 
 
 ViteExpress.listen(app, 3001, () => console.log('Server is listening on port 3001...'));
