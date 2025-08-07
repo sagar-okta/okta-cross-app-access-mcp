@@ -1,6 +1,6 @@
 import { Sidebar } from 'flowbite-react';
 import { useState } from 'react';
-import { HiHome, HiLogout, HiUserCircle } from 'react-icons/hi';
+import { HiHome, HiLogout, HiMenuAlt2, HiUserCircle, HiX } from 'react-icons/hi';
 import { Outlet, useNavigate } from 'react-router-dom';
 import todoListIcon from '../assets/todo_list_icon.png';
 import { useAuthState } from './authState';
@@ -10,6 +10,7 @@ function DefaultLayout() {
   const { authState, onRevokeAuthFn } = useAuthState();
   const navigate = useNavigate();
   const [showConfirm, setShowConfirm] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogoutClick = () => setShowConfirm(true);
   const handleCancel = () => setShowConfirm(false);
@@ -22,8 +23,21 @@ function DefaultLayout() {
   };
 
   return (
-    <div>
-      <Sidebar className="fixed top-0 left-0 z-40 w-60 h-screen transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700 py-6 px-2">
+    <div className="flex">
+      {/* Sidebar Toggle Button */}
+      <button
+        className={`fixed top-4 left-4 z-50 p-2 rounded-full bg-white shadow-md border border-gray-200 transition-transform ${sidebarOpen ? 'translate-x-60' : ''}`}
+        style={{ transition: 'transform 0.3s' }}
+        onClick={() => setSidebarOpen((open) => !open)}
+        aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
+      >
+        {sidebarOpen ? <HiX size={24} /> : <HiMenuAlt2 size={24} />}
+      </button>
+      {/* Sidebar */}
+      <Sidebar
+        className={`fixed top-0 left-0 z-40 w-60 h-screen transition-transform bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 py-6 px-2 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        style={{ transition: 'transform 0.3s' }}
+      >
         <Sidebar.Logo
           href="/"
           img={todoListIcon}
@@ -60,7 +74,11 @@ function DefaultLayout() {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
-      <main className="ml-24 w-full h-auto">
+      {/* Main Content */}
+      <main
+        className={`transition-all w-full h-auto ${sidebarOpen ? 'ml-60' : 'ml-4'}`}
+        style={{ minHeight: '100vh', transition: 'margin-left 0.3s' }}
+      >
         <Outlet />
       </main>
       <ConfirmModal
