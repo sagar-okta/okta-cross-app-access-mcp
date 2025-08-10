@@ -24,9 +24,15 @@ files.forEach(([src, dest]) => {
   }
 });
 
-console.log('\n[setup:env] Default .env files copied (if not already present).');
-console.log('Please edit the following files to fill in required values:');
-console.log('  - packages/authorization-server/.env.todo');
-console.log('  - packages/authorization-server/.env.agent');
-console.log('  - packages/agent0/.env (for AWS credentials and Bedrock config)');
-console.log('Required fields: CUSTOMER1_AUTH_ISSUER, CUSTOMER1_CLIENT_ID, CUSTOMER1_CLIENT_SECRET');
+console.log(' Default .env files copied ✅ ');
+console.log('──────────────────────────────────────────────────────────────');
+console.log('📝  Next steps: Please edit the following files to fill in required values:');
+console.log('    • packages/authorization-server/.env.todo');
+console.log('    • packages/authorization-server/.env.agent');
+console.log('    • packages/agent0/.env (for AWS credentials and Bedrock config)');
+console.log('    (Required fields: CUSTOMER1_AUTH_ISSUER, CUSTOMER1_CLIENT_ID, CUSTOMER1_CLIENT_SECRET)');
+console.log('──────────────────────────────────────────────────────────────');
+console.log('OAuth Redirect URIs you should register in your Oktapreview:')
+console.log(`    • Agent0 Redirect URI: http://localhost:5000/openid/callback/customer1`);
+console.log(`    • Todo0 Redirect URI: http://localhost:5001/openid/callback/customer1`);
+console.log('──────────────────────────────────────────────────────────────');

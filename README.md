@@ -77,7 +77,7 @@ Edit the following files to fill in required values:
 > **How to retrieve these values:**
 >
 > - These values are provided by your Identity Provider (IdP) when you register your OIDC application.
-> - For AWS credentials, visit your AWS IAM console and create or retrieve an access key for your user.
+> - For AWS credentials, to know how to generate AWS Credentials - [Follow this steps](guide/aws-bedrock.md)
 > - Typically, you can find IdP values in your IdP's admin console or developer portal under the application/client settings.
 > - For example, in Okta, Azure AD, Auth0, or similar providers, look for the "Issuer URL" and "Client ID" fields.
 > - If unsure, consult your IdP or AWS documentation or administrator for guidance.
