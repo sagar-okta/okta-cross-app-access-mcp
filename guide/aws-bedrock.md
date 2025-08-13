@@ -281,7 +281,7 @@ Select: ☑ AmazonBedrockFullAccess
 1. **Initialize Key Creation**
    `Access keys section → Create access key`
 
-![Create Access Key](/images/image5.spng)
+![Create Access Key](/images/image5.png)
 
 2. **Use Case Selection**
    `Select: "Application running outside AWS"`
