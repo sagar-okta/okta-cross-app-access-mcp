@@ -22,18 +22,20 @@ A proof-of-concept demonstrating how a Model Context Protocol (MCP) can leverage
 
 # Quickstart & Dev Setup
 
-**Highly Recommended:**
+- **Run Locally in VS Code (Recommended):**
+  - Pre-requisites:
+    - [Docker Desktop](https://www.docker.com/products/docker-desktop/) (required for local containers)
+    - [VS Code](https://code.visualstudio.com/) (required for Dev Containers)
+    - [Dev Containers VSCode Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-- **Run in GitHub Codespaces**
-  - Click "Code" → "Create a codespace on main" in the GitHub UI and your environment will be ready in minutes.
-  - Or, launch instantly:
+- **GitHub Codespaces (Alternative):**
 
-    [<img src="https://github.com/codespaces/badge.svg" title="Open in Github Codespace" width="300" height="60">](https://github.com/codespaces/new?repo=oktadev/okta-cross-app-access-mcp)
-
-- **Run Locally in VS Code (Alternative):**
-  - [Docker Desktop](https://www.docker.com/products/docker-desktop/) (required for local containers)
-  - [VS Code](https://code.visualstudio.com/) (required for Dev Containers)
-  - [Dev Containers VSCode Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+  - Start a GitHub Codespace from the GitHub UI ("Code" → "Create codespace on main").
+  - After the Codespace is running, connect to it using your local VS Code client via SSH:
+    - In VS Code, open the Command Palette (`Cmd+Shift+P` on Mac, `Ctrl+Shift+P` on Windows/Linux)
+    - Search for and select "Codespaces: Connect to Codespace via SSH"
+    - Choose your running Codespace
+  - This allows you to access local ports from your VS Code client as if running locally.
 
 ## 1. Clone and Open in VS Code
 
