@@ -6,11 +6,29 @@ A comprehensive guide for developers to set up AWS credentials for Amazon Bedroc
 
 - [Prerequisites](#prerequisites)
 - [Environment Setup](#environment-setup)
-- [AWS Console Access](#aws-console-access)
-- [Amazon Bedrock Configuration](#amazon-bedrock-configuration)
-- [IAM User Creation](#iam-user-creation)
-- [Permissions Configuration](#permissions-configuration)
-- [Access Key Generation](#access-key-generation)
+- [Option 1 - Accessing Amazon Bedrock Without Root-User Privileges](#option-1---accessing-amazon-bedrock-without-root-user-privileges)
+  - [Step 1: Request Access from Your AWS Administrator](#step-1-request-access-from-your-aws-administrator)
+  - [Step 2: Using Amazon Bedrock as an IAM User](#step-2-using-amazon-bedrock-as-an-iam-user)
+    - [Log in (and switch role if required)](#a-log-in-and-switch-role-if-required)
+    - [Check Bedrock Console Access](#b-check-bedrock-console-access)
+    - [Generate Credentials for CLI/SDK Use](#c-generate-credentials-for-clisdk-use)
+    - [Test Your Access](#d-test-your-access)
+- [Option 2 - Accessing Amazon Bedrock with Root-User Privileges](#opion-2---accessing-amazon-bedrock-with-root-user-privileges)
+  - [Step 1: Initial Login](#step-1-initial-login)
+  - [Amazon Bedrock Configuration](#amazon-bedrock-configuration)
+    - [Step 1: Access Bedrock Service](#step-1-access-bedrock-service)
+    - [Step 2: Model Access Request](#step-2-model-access-request)
+  - [IAM User Creation](#iam-user-creation)
+    - [Step 1: Navigate to IAM Service](#step-1-navigate-to-iam-service)
+    - [Step 2: User Configuration](#step-2-user-configuration)
+  - [Permissions Configuration](#permissions-configuration)
+    - [Step 1: Permission Strategy](#step-1-permission-strategy)
+    - [Step 2: Attach Policies](#step-2-attach-policies)
+  - [Access Key Generation](#access-key-generation)
+    - [Step 1: Access Security Credentials](#step-1-access-security-credentials)
+    - [Step 2: Create Access Keys](#step-2-create-access-keys)
+    - [Step 3: Retrieve Credentials](#step-3-retrieve-credentials)
+- [Integration with Project](#integration-with-project)
 
 ## Prerequisites
 
@@ -40,7 +58,79 @@ AWS_SECRET_ACCESS_KEY=<your-secret-key>
 
 **Important**: This guide uses `us-east-1` (US East \- N. Virginia) as it has the broadest Amazon Bedrock model availability, including Claude Opus.
 
-## AWS Console Access
+
+
+## Option 1 - Accessing Amazon Bedrock Without Root-User Privileges
+
+If you are an IAM user in a shared AWS account (not the root user), you can still work with Amazon Bedrock once an administrator grants you the necessary permissions and model access. This section outlines both what to request from an admin and how to proceed after approval.
+
+### Step 1: Request Access from Your AWS Administrator
+
+Share this checklist with your AWS admin:
+
+- **Attach a Bedrock policy** to your IAM user, group, or role:
+  - **AmazonBedrockFullAccess** – full console & API access (development use).
+  - **AmazonBedrockReadOnlyAccess** – console view only, no model invocations.
+  - **AmazonBedrockLimitedAccess** – restricted scope for specific API keys and Marketplace subscriptions.
+
+- **Model Access Approval**:
+  - In the Bedrock console, the admin must grant your user or role **model access** to the  Claude 3.7 Sonnet model under **Bedrock → Model access**.
+
+- **(Optional) Role-based Access**:
+  - For security, the admin can create a dedicated IAM role with Bedrock permissions, and let you **assume** that role when needed.
+
+- **API Key Creation Rights** (if you'll need long-term Bedrock API keys):
+  - Admin must allow `iam:CreateServiceSpecificCredential` so you can generate Bedrock-specific credentials.
+
+### Step 2: Using Amazon Bedrock as an IAM User
+
+Once your admin has granted access:
+
+#### a. Log in (and switch role if required)
+1. Sign in to the AWS Console as an IAM user.
+2. If you have a dedicated Bedrock role, go to **Account menu → Switch role**, enter the role ARN, and switch.
+
+#### b. Check Bedrock Console Access
+1. Ensure the region is set to **US East (N. Virginia) – us-east-1**.
+2. Search for **Amazon Bedrock** in the console search bar and open it.
+3. If you still see a “Sign-up” or “Request access” prompt, your **model access** hasn’t been approved—ask your admin to complete that step.
+
+#### c. Generate Credentials for CLI/SDK Use
+
+**Option 1 – Temporary Credentials via STS (recommended)**
+```bash
+aws sts assume-role \
+  --role-arn arn:aws:iam::123456789012:role/BedrockAccessRole \
+  --role-session-name bedrock-dev
+# Use AccessKeyId, SecretAccessKey, and SessionToken from the output
+```
+
+**Option 2 – Long-term Bedrock API Key**
+- In **IAM Console → Security credentials** (for your IAM user), choose **Create Bedrock API key**.
+- Save the key ID and secret securely.
+
+**Set environment variables locally**:
+```bash
+export AWS_REGION=us-east-1
+export AWS_ACCESS_KEY_ID=...
+export AWS_SECRET_ACCESS_KEY=...
+export AWS_SESSION_TOKEN=... # if using STS
+```
+
+#### d. Test Your Access
+```bash
+# List models
+aws bedrock list-foundation-models --region us-east-1
+
+# Check if Claude Opus/Sonnet is visible
+aws bedrock list-foundation-models \
+  --region us-east-1 \
+  --query "modelSummaries[?contains(modelId,'claude-3-opus')]"
+```
+If both commands return results, you're ready to integrate Bedrock into your app.
+
+
+## Opion 2 - Accessing Amazon Bedrock with Root-User Privileges
 
 ### Step 1: Initial Login
 
