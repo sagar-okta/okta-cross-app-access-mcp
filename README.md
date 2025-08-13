@@ -58,6 +58,7 @@ yarn setup:env
 
 Edit the following files to fill in required values:
 
+- `packages/authorization-server/.env.agent`
 - `packages/authorization-server/.env.todo`
 - `packages/agent0/.env`
 
