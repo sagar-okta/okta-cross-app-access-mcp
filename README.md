@@ -120,7 +120,10 @@ To access the application interfaces, open your browser and navigate to:
 
 ## 5. Verify Your Setup
 
-//TODO
+<a href="https://youtu.be/vi5JpbGRATE?t=1415">
+  <img src="https://img.youtube.com/vi/vi5JpbGRATE/0.jpg" width="100%" height="100%" />
+</a>
+
 
 ### What to do if a test fails
 
