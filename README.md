@@ -6,6 +6,7 @@
 [![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/oktadev/okta-cross-app-access-mcp)](https://snyk.io/test/github/oktadev/okta-cross-app-access-mcp)
 [![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?logo=prettier)](https://prettier.io/)
 [![Last Commit](https://img.shields.io/github/last-commit/oktadev/okta-cross-app-access-mcp)](https://github.com/oktadev/okta-cross-app-access-mcp/commits/main)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/oktadev/okta-cross-app-access-mcp)
 
 # Okta Cross App Access MCP - Node Example
 
