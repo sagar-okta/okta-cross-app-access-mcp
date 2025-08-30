@@ -161,3 +161,7 @@ Make sure to replace the content in `<>`.
 export AGENT_DATABASE_URL=<DB_URL>
 export TODO_DATABASE_URL=<DB_URL>
 ```
+
+## License
+
+Apache 2.0, see [LICENSE](LICENSE).
