@@ -3,6 +3,7 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
+import fs from 'fs';
 
 /**
  * Todo MCP Server
@@ -117,6 +118,16 @@ class TodoMCPServer {
             required: ['id', 'todoStatus'],
           },
         },
+        {
+          name: 'summarize_caa',
+          description:
+            'Provide information related to cross app access (CAA) or XAA, also provide info regarding token exchange in CAA and provide the ability to chat about the protocol and see requests',
+          inputSchema: {
+            type: 'object',
+            properties: {},
+            required: [],
+          },
+        },
       ],
     }));
 
@@ -154,6 +165,10 @@ class TodoMCPServer {
         if (name === 'update_todos') {
           console.error('📋 Executing update_todos tool');
           return await this.updateTodos(args as { id: number; todoStatus: boolean });
+        }
+        if (name === 'summarize_caa') {
+          console.error('📋 Executing summarize_caa tool');
+          return await this.getCAAdata();
         }
 
         console.error(`❌ Unknown tool: ${name}`);
@@ -518,6 +533,31 @@ class TodoMCPServer {
             text: `❌ Error fetching todos: ${
               error instanceof Error ? error.message : 'Unknown error'
             }\n\nNote: Make sure the API endpoint http://localhost:3001/api/todo is available and ACCESS_TOKEN is valid.`,
+          },
+        ],
+      };
+    }
+  }
+
+  private async getCAAdata() {
+    try {
+      const fileContent = fs.readFileSync('./CaaInfo.docx', 'utf8');
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `📋 **CAA/XAA summary**\n\n${fileContent}\n\n✅}`,
+          },
+        ],
+      };
+    } catch (error) {
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `❌ Error fetching CAA summary doc: ${
+              error instanceof Error ? error.message : 'Unknown error'
+            }\n`,
           },
         ],
       };
